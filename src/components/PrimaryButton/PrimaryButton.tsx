@@ -2,12 +2,17 @@ import { View, Text, Pressable, StyleSheet } from "react-native";
 
 type PrimaryButtonProps = {
   children: React.ReactNode;
+  buttonWidth?: number ;
+  buttonHeight?: number;
   onPress: () => void;
 };
-const PrimaryButton = ({ children, onPress }: PrimaryButtonProps) => {
+
+// const buttonWidth=120;
+// const buttonHeight=40;
+const PrimaryButton = ({ children, buttonWidth,buttonHeight, onPress }: PrimaryButtonProps) => {
   return (
     <Pressable
-      style={({ pressed }) => [styles.container, pressed && styles.pressed]}
+      style={({ pressed }) => [styles.container,{width:buttonWidth, height:buttonHeight}, pressed && styles.pressed]}
       onPress={() => {
         onPress();
       }}
@@ -25,10 +30,8 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
     paddingHorizontal: 15,
     borderRadius: 25,
-    borderWidth: 0.75,
-    borderColor: "white",
-    width: 120,
     alignItems: "center",
+    justifyContent: "center",
     marginHorizontal: 10,
   },
   pressed: {

@@ -1,14 +1,17 @@
-import { ImageBackground, Text, TextInput, View } from "react-native";
+import { Alert, Text, TextInput, View } from "react-native";
 import PrimaryButton from "../../components/PrimaryButton/PrimaryButton";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { styles } from "./styles";
 import BackgroundWrapper from "../../BackgroundWrapper";
-
-const image = require("../../../assets/images/background-gradient-lights.jpg");
-
+import { NavigationProp, useNavigation } from "@react-navigation/native";
+import { GameScreenRouteProps } from "../GameScreen";
+type RouteParamsList = {
+  GameScreen: GameScreenRouteProps;
+};
 const StartGameScreen = () => {
+  const navigation = useNavigation<NavigationProp<RouteParamsList>>();
   const [enteredValue, setEnteredValue] = useState("");
   const [myNumber, setMyNumber] = useState(0);
 
@@ -24,23 +27,42 @@ const StartGameScreen = () => {
 
     setEnteredValue(numericValue);
     setMyNumber(number);
-    console.log(number);
+   
   };
 
   const onReset = () => {
     setEnteredValue("");
+    setMyNumber(0);
   };
   const onConfirm = () => {
-    console.log(enteredValue);
-    console.log(myNumber);
+    if (!isValidNumber()) {
+      Alert.alert("Invalid Number", "Please enter a number between 1 and 100", [
+        { text: "OK" },
+      ]);
+      return;
+    }
+    // HERE NAVIGATE TO THE GAME SCREEN
+    navigation.navigate("GameScreen", {
+      theNumber: myNumber,
+    });
+    
+  };
+
+  const isValidNumber = (): boolean => {
+    return myNumber > 0 && myNumber <= 100;
   };
 
   return (
     <SafeAreaProvider>
       <StatusBar style="light" />
-      {/* <ImageBackground source={image} resizeMode="cover" style={styles.image}> */}
+
       <BackgroundWrapper>
         <SafeAreaView style={styles.safeArea}>
+          <View style={styles.startGameLabelContainer}>
+            <Text style={{ fontSize: 24, color: "white" }}>
+              Start a new game
+            </Text>
+          </View>
           <View style={styles.container}>
             <Text style={styles.label}>Enter Your number</Text>
             <TextInput
@@ -61,13 +83,24 @@ const StartGameScreen = () => {
               </Text>
             )}
             <View style={styles.buttonsContainer}>
-              <PrimaryButton onPress={onReset}>Reset</PrimaryButton>
-              <PrimaryButton onPress={onConfirm}>Confirm</PrimaryButton>
+              <PrimaryButton
+                buttonHeight={40}
+                buttonWidth={120}
+                onPress={onReset}
+              >
+                Reset
+              </PrimaryButton>
+              <PrimaryButton
+                buttonHeight={40}
+                buttonWidth={120}
+                onPress={onConfirm}
+              >
+                Confirm
+              </PrimaryButton>
             </View>
           </View>
         </SafeAreaView>
       </BackgroundWrapper>
-      {/* </ImageBackground> */}
     </SafeAreaProvider>
   );
 };

@@ -4,13 +4,23 @@ export const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center",
+    //justifyContent: "center",
     //backgroundColor: "rgba(0, 0, 0, 0.5)"
+  },
+  startGameLabelContainer: {
+    width: "80%",
+    height:60,
+    justifyContent: "center",
+    alignContent: "center",
+    alignItems: "center",
+    marginVertical: 40,
+    borderWidth: 1,
+    borderColor: "white",
   },
   container: {
     alignItems: "center",
     justifyContent: "center",
-    padding: 20,
+    padding: 10,
     backgroundColor: "rgba(0, 0, 0, 0.5)",
     borderRadius: 10,
   },
