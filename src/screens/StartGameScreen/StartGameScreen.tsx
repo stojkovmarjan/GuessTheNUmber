@@ -27,7 +27,6 @@ const StartGameScreen = () => {
 
     setEnteredValue(numericValue);
     setMyNumber(number);
-   
   };
 
   const onReset = () => {
@@ -45,7 +44,7 @@ const StartGameScreen = () => {
     navigation.navigate("GameScreen", {
       theNumber: myNumber,
     });
-    
+    setEnteredValue("");
   };
 
   const isValidNumber = (): boolean => {
@@ -55,7 +54,6 @@ const StartGameScreen = () => {
   return (
     <SafeAreaProvider>
       <StatusBar style="light" />
-
       <BackgroundWrapper>
         <SafeAreaView style={styles.safeArea}>
           <View style={styles.startGameLabelContainer}>
@@ -63,6 +61,7 @@ const StartGameScreen = () => {
               Start a new game
             </Text>
           </View>
+
           <View style={styles.container}>
             <Text style={styles.label}>Enter Your number</Text>
             <TextInput
