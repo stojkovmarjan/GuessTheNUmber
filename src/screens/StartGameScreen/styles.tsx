@@ -22,18 +22,28 @@ export const styles = StyleSheet.create({
     padding: 4,
     borderBottomWidth: 1,
     borderBottomColor: "rgba(204, 204, 204, 1)",
-    marginBottom: 20,
+    marginBottom: 4,
     textAlign: "center",
     fontSize: 24,
     color: "white",
+  },
+  inputError: {
+    color: "red",
   },
   label: {
     color: "white",
     fontSize: 18,
   },
+  labelError: {
+    color: "red",
+    fontSize: 12,
+    marginBottom: 4,
+  },
   buttonsContainer: {
+    marginTop: 10,
     flexDirection: "row",
     width: "100%",
     alignItems: "center",
   },
+
 });
